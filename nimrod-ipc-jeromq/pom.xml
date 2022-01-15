@@ -67,4 +67,12 @@
         </plugins>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub andycrutchlow Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/andycrutchlow/nimrod-ipc2</url>
+        </repository>
+    </distributionManagement>
+
 </project>
