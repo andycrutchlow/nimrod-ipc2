@@ -83,7 +83,7 @@
         <dependency>
             <groupId>org.zeromq</groupId>
             <artifactId>jzmq-jni</artifactId>
-            <version>3.1.1-SNAPSHOT</version>
+            <version>3.1.1-NIMROD</version>
             <scope>compile</scope>
         </dependency>
 
