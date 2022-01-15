@@ -5,12 +5,12 @@
     <parent>
         <artifactId>nimrod-ipc2</artifactId>
         <groupId>com.nimrodtechs</groupId>
-        <version>1.0.2</version>
+        <version>1.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>nimrod-ipc-jeromq</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.1</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -21,7 +21,7 @@
         <dependency>
             <groupId>com.nimrodtechs</groupId>
             <artifactId>nimrod-ipc</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.1</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.zeromq</groupId>

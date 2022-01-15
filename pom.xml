@@ -7,7 +7,7 @@
     <groupId>com.nimrodtechs</groupId>
     <artifactId>nimrod-ipc2</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.2</version>
+    <version>1.0.1</version>
     <modules>
         <module>jzmq-jni</module>
         <module>jeromq</module>
