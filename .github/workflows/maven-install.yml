@@ -28,7 +28,7 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Build with Maven
-       env:
+      env:
         GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
       run: |
         mkdir ~/.m2
