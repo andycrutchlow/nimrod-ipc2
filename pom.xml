@@ -20,12 +20,12 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
-<!--    <distributionManagement>-->
-<!--        <repository>-->
-<!--            <id>github</id>-->
-<!--            <name>GitHub andycrutchlow Apache Maven Packages</name>-->
-<!--            <url>https://maven.pkg.github.com/andycrutchlow/nimrod-ipc2</url>-->
-<!--        </repository>-->
-<!--    </distributionManagement>-->
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub andycrutchlow Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/andycrutchlow/nimrod-ipc2</url>
+        </repository>
+    </distributionManagement>
 
 </project>
