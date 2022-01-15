@@ -6,6 +6,7 @@ target/
 *.ipr
 .flattened-pom.xml
 */.flattened-pom.xml
+*/dependency-reduced-pom.xml
 
 # eclipse project file
 .settings/
