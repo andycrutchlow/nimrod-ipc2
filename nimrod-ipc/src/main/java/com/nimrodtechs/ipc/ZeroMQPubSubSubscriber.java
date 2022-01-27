@@ -172,7 +172,7 @@ public class ZeroMQPubSubSubscriber extends ZeroMQCommon {
 						totalMsgs++;
 						// Dispatch the new message to the registered
 						// subscribers
-						dispatch(subject, message);
+						dispatch(System.currentTimeMillis(),subject, message);
 						hasMore = externalSocket.hasReceiveMore();
 					}
 				}
@@ -481,10 +481,11 @@ public class ZeroMQPubSubSubscriber extends ZeroMQCommon {
 		client.close();
 	}
 
-	void dispatch(String subject, byte[] message) {
+	void dispatch(long timeMsgRecvd, String subject, byte[] message) {
 		MessageProcessorEntry mpe = messageProcessorEntries.get(subject);
 		if (mpe != null) {
 			// Pass on to the appropriate executor to process the message
+			mpe.setTimeMsgRcvd(timeMsgRecvd);
 			mpe.getQueueExecutor().process(subject, subject, message, mpe, listenersBySubjectMap);
 		}
 		for (final String wildcardSubject : wildcardSubjects) {
@@ -494,6 +495,7 @@ public class ZeroMQPubSubSubscriber extends ZeroMQCommon {
 					if (mpe != null) {
 						// Pass on to the appropriate executor to process
 						// the message
+						mpe.setTimeMsgRcvd(timeMsgRecvd);
 						mpe.getQueueExecutor().process(wildcardSubject, subject, message, mpe, listenersBySubjectMap);
 					}
 				}

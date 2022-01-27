@@ -69,7 +69,8 @@ public class TestSubscriberManyToOne implements InstanceEventReceiverInterface {
     static class TestSubjectHandler implements MessageReceiverInterface {
         public void messageReceived(String subject, Object message) {
             TestDTO t = (TestDTO)message;
-            logger.info("TestSubjectHandler : subject="+subject+" field1="+t.field1+" field2="+t.field2+" field3="+t.field3);
+            long timeTaken = System.currentTimeMillis() - t.field3;
+            logger.info("TestSubjectHandler : subject="+subject+" field1="+t.field1+" field2="+t.field2+" field3="+t.field3+" timeTaken="+timeTaken);
         }
     }
 

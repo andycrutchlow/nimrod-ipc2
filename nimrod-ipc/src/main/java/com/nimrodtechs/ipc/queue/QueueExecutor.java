@@ -56,6 +56,8 @@ public abstract class QueueExecutor implements UncaughtExceptionHandler {
     private int threadPoolSize = System.getProperty("subscriptionThreadPoolSize") != null ? Integer.parseInt(System.getProperty("subscriptionThreadPoolSize")) : (ZeroMQCommon.GetDefaultThreadPoolSize());
     private int threadPoolType = 0;
 
+    private boolean doStats = Boolean.parseBoolean(System.getProperty("nimrod.ipc.doStats","false"));
+
     class TF implements ThreadFactory {
         UncaughtExceptionHandler handler;
         // Only one thread will ever be invoking the factory so dont need to
@@ -129,7 +131,7 @@ public abstract class QueueExecutor implements UncaughtExceptionHandler {
                             else {
                                 if (messageAsObject == null) {
                                     try {
-                                        messageAsObject = deserialize(messageWrapper.rawMessage, payLoadClass, mpe.getSerializationFormatId());
+                                        messageAsObject = deserialize(mpe.getTimeMsgRcvd(), messageWrapper.actualSubject,  messageWrapper.rawMessage, payLoadClass, mpe.getSerializationFormatId());
                                     }
                                     catch (Throwable e) {
                                         logger.error("Failed to deserialize payload to class " + payLoadClass.getSimpleName() + " on subject " + subject, e);
@@ -236,19 +238,23 @@ public abstract class QueueExecutor implements UncaughtExceptionHandler {
         }
     }
 
-    private Object deserialize(byte[] aMessage, Class payloadClass, String serializationFormatId) throws NimrodSerializationException {
+    private Object deserialize(long timeMsgRcvd, String actualSubject, byte[] aMessage, Class payloadClass, String serializationFormatId) throws NimrodSerializationException {
         // Message just consists of a 8 byte time stamp and a serialized data
         // class
-        // TODO Do something useful with the timestamp ... update statistics on
-        // this subscriber transport, subject (needs to be passed in), message
-        // size etc...
-        long timestamp = extractLong(aMessage, 0, 8);
         // The payloadClass indicates the desired class to deserialize and
         // return..if its a byte[] then keep intact
         if (payloadClass == byte[].class)
             return aMessage;
         else {
+            // TODO Do something useful with the timestamp ... update statistics on
+            // this subscriber transport, subject (needs to be passed in), message
+            // size etc...
+            long timestamp = extractLong(aMessage, 0, 8);
+            if(doStats) {
+                System.out.println(Thread.currentThread().getName()+ " "+actualSubject +" timetaken="+(timeMsgRcvd-timestamp)+" len="+aMessage.length);
+            }
             byte[] actualMessage = new byte[aMessage.length - 8];
+            //Starting at position 8 to skip over the timestamp
             System.arraycopy(aMessage, 8, actualMessage, 0, aMessage.length - 8);
             return NimrodObjectSerializer.deserialize(serializationFormatId, actualMessage, payloadClass);
         }

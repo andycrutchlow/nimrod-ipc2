@@ -31,6 +31,8 @@ public class MessageProcessorEntry {
     protected String serializationFormatId;
     protected boolean wildcardSubscription = false;
 
+    protected long timeMsgRcvd;
+
     public String getServiceName() {
         return serviceName;
     }
@@ -78,5 +80,14 @@ public class MessageProcessorEntry {
     public void setQueueExecutor(QueueExecutor queueExecutor) {
         this.queueExecutor = queueExecutor;
     }
+
+    public long getTimeMsgRcvd() {
+        return timeMsgRcvd;
+    }
+
+    public void setTimeMsgRcvd(long timeMsgRcvd) {
+        this.timeMsgRcvd = timeMsgRcvd;
+    }
+
 
 }

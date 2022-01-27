@@ -64,7 +64,7 @@ public class TestPublisher implements InstanceEventReceiverInterface {
             	TestDTO t = new TestDTO();
             	t.setField1("HELLO");
             	t.setField2(i);
-            	t.setField3(i);
+            	t.setField3(System.currentTimeMillis());
                 publisher.publish("testsubject3", t);
 
                 //Examples which demonstrates wildcard subscription on aaaa.bbbb.* and using a serialized class

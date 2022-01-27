@@ -5,12 +5,12 @@
     <parent>
         <artifactId>nimrod-ipc2</artifactId>
         <groupId>com.nimrodtechs</groupId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>nimrod-ipc-jeromq</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -21,7 +21,7 @@
         <dependency>
             <groupId>com.nimrodtechs</groupId>
             <artifactId>nimrod-ipc</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.zeromq</groupId>
@@ -34,6 +34,11 @@
             <artifactId>jeromq</artifactId>
             <version>0.5.2-NIMROD</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.1</version>
         </dependency>
     </dependencies>
 
@@ -54,11 +59,14 @@
                             <artifactSet>
                                 <includes>
                                     <include>com.nimrodtechs:nimrod-ipc</include>
-                                    <include>org.zeromq:*</include>
+                                    <include>org.zeromq:jeromq</include>
 <!--                                    <include>com.esotericsoftware:kryo</include>-->
 <!--                                    <include>com.esotericsoftware:reflectasm</include>-->
 <!--                                    <include>com.esotericsoftware:minlog</include>-->
                                 </includes>
+                                <excludes>
+                                    <exclude>org.zeromq:jzmq-jni</exclude>
+                                </excludes>
                             </artifactSet>
                         </configuration>
                     </execution>

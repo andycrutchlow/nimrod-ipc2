@@ -251,10 +251,12 @@ public class ZeroMQPubSubPublisher extends ZeroMQCommon {
 			}
 			//Insert timestamp at start of message..if the original message is not a byte[] ... assume timestamp already there is its a byte[]
 			byte[] messageAsBytesWithTimestamp;
+			long currentTime = System.currentTimeMillis();
 			if (isByteArray)
 				messageAsBytesWithTimestamp = messageAsBytes;
-			else
-				messageAsBytesWithTimestamp = insertLong(messageAsBytes, System.nanoTime());
+			else {
+				messageAsBytesWithTimestamp = insertLong(messageAsBytes, currentTime);
+			}
 			publishRaw(subject, messageAsBytesWithTimestamp);
 			//Don't store initial value publish messages
 			if (subject.startsWith(AGENT_SUBJECT_PREFIX) == false && saveLatestValue == true)

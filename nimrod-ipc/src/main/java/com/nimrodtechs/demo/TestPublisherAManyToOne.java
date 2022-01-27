@@ -64,9 +64,9 @@ public class TestPublisherAManyToOne implements InstanceEventReceiverInterface {
                 TestDTO t2 = new TestDTO();
                 t2.setField1("From PublisherA");
                 t2.setField2(i);
-                t2.setField3(i);
+                t2.setField3(System.currentTimeMillis());
                 publisher.publish("md.publisherA.USD.CAD", t2);
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             }
             //Finished
             publisher.dispose();

@@ -77,7 +77,8 @@ public class TestSubscriber implements InstanceEventReceiverInterface  {
     static class TestSubjectHandler3 implements MessageReceiverInterface {
         public void messageReceived(String subject, Object message) {
             TestDTO t = (TestDTO)message;
-            logger.info("TestSubjectHandler3 : subject="+subject+" field1="+t.field1+" field2="+t.field2+" field3="+t.field3);
+            long timeTaken = System.currentTimeMillis() - t.field3;
+            logger.info("TestSubjectHandler3 : subject="+subject+" field1="+t.field1+" field2="+t.field2+" field3="+t.field3+" timetaken="+timeTaken);
         }
     }
     static class TestSubjectWildcardHandler implements MessageReceiverInterface {
